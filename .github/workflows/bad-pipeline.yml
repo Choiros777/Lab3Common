@@ -21,9 +21,12 @@ jobs:
         
       - name: Deploy
         run: |
-          docker compose up -d
+          docker compose up -d --wait=false
           sleep 15
+          
         
           docker compose exec -T backend flask db upgrade
           curl -f http://localhost:5100/api/notes || echo "Сервис не отвечает, но пайплайн зеленый!"
+
+
 
